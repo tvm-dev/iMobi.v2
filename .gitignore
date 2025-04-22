@@ -1,1 +1,54 @@
 node_modules\n.env\ndist\n.next
+
+# Node
+node_modules/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ambiente
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDEs
+.vscode/
+.idea/
+*.sw?
+
+# Next.js
+.next/
+out/
+
+# NestJS (builds)
+build/
+coverage/
+
+# MacOS / Linux / Windows
+.DS_Store
+Thumbs.db
+
+# Sistema
+*.pid
+*.seed
+*.pid.lock
+*.tsbuildinfo
+
+# Logs e arquivos temporários
+tmp/
+temp/
+*.tmp
+
+# Prisma (caso use)
+prisma/migrations/
+
+# Testes
+test-results/
+coverage/
+
+# TypeScript
+*.tsbuildinfo
