@@ -1,8 +1,7 @@
 import { HiHome } from 'react-icons/hi';
 import { FaCalendarCheck, FaGavel } from 'react-icons/fa';
-import { AiOutlineMail } from 'react-icons/ai';
 
-export const NAV_SIDEBAR = [
+export const NAV_LINKS = [
   {
     href: 'home',
     label: 'Home',
@@ -17,10 +16,5 @@ export const NAV_SIDEBAR = [
     href: 'appointments',
     label: 'Agendamentos',
     icon: <FaCalendarCheck size={22} />,
-  },
-  {
-    href: 'contact',
-    label: 'Contato',
-    icon: <AiOutlineMail size={22} />,
   },
 ];
