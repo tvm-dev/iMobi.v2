@@ -41,11 +41,22 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+:root {
+  --color-navy: #003366;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  .bg-navy {
+    background-color: var(--color-navy);
+  }
+  .text-navy {
+    color: var(--color-navy);
   }
 }
