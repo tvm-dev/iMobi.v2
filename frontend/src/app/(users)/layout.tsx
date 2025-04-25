@@ -11,16 +11,14 @@ export default function RootLayout({
   const contactRef = useRef<HTMLDivElement>(null);
 
   return (
-    <main className='flex flex-col justify-between min-h-screen w-full '>
+    <main className='flex flex-col justify-between min-h-screen w-full bg-sky-50/70'>
       <section>
         <Sidebar
           onContactClick={() =>
             contactRef.current?.scrollIntoView({ behavior: 'smooth' })
           }
         />
-        <div className='mx-auto p-4 bg-zinc-200 max-w-7xl h-full'>
-          {children}
-        </div>
+        <div className='mx-auto p-4 max-w-7xl h-full'>{children}</div>
       </section>
       <Footer ref={contactRef} />
     </main>
