@@ -1,8 +1,0 @@
-export default function DashboardPage() {
-  return (
-    <main>
-      <h1>Auctioneers</h1>
-      <h2>Auct</h2>
-    </main>
-  );
-}
