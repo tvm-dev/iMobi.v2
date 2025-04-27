@@ -6,8 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { tableTitles } from '@/shared/constants/tableTitles';
-import { FaSort } from 'react-icons/fa';
+import { tableTitles } from '@/shared/constants/tableTitlesHome';
 
 export const HomeTable = () => {
   return (

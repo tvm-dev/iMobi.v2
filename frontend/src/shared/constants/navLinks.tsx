@@ -1,5 +1,5 @@
 import { HiHome } from 'react-icons/hi';
-import { FaCalendarCheck, FaGavel } from 'react-icons/fa';
+import { FaCalendarAlt, FaGavel } from 'react-icons/fa';
 
 export const NAV_LINKS = [
   {
@@ -15,6 +15,6 @@ export const NAV_LINKS = [
   {
     href: 'appointments',
     label: 'Agendamentos',
-    icon: <FaCalendarCheck size={22} />,
+    icon: <FaCalendarAlt size={22} />,
   },
 ];

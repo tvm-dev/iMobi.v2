@@ -1,19 +1,26 @@
-import { MdEmail } from 'react-icons/md';
+import React from 'react';
 
 interface ContactButtonProps {
+  icon: React.ReactNode;
+  text: string;
   onContactClick?: () => void;
   line?: boolean;
 }
 
-export const ContactButton = ({ onContactClick, line }: ContactButtonProps) => {
+export const SideBarNavButton = ({
+  onContactClick,
+  line,
+  icon,
+  text,
+}: ContactButtonProps) => {
   return (
     <div
       className={'flex flex-col group hover:cursor-pointer'}
       onClick={onContactClick}
     >
       <div className='flex flex-row gap-1 items-start text-base group-hover:text-yellow-400'>
-        <MdEmail size={22} />
-        <span>Contato</span>
+        {icon}
+        <span>{text}</span>
       </div>
 
       {/* Linha animada */}

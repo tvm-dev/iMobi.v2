@@ -9,9 +9,12 @@ import { IoIosArrowForward } from 'react-icons/io';
 // Footer da aplicação
 export const Footer = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <footer ref={ref} className='flex flex-col'>
+    <footer
+      ref={ref}
+      className='flex flex-col items-center justify-center bg-navy'
+    >
       {/* Informações do Footer */}
-      <div className='pt-8 px-11 bg-navy grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] text-zinc-200'>
+      <div className='pt-8 px-4 w-full max-w-7xl  grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] text-zinc-200'>
         {/* Logo e descrição */}
         <section className='flex flex-col gap-5 pr-10 mb-6'>
           <Logo iconSize={25} textSize='4' versatileTitle />

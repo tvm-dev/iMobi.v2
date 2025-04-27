@@ -4,8 +4,10 @@ import { CustomLink } from '@/components/ui/customLink';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Logo } from '../shared/Logo';
-import { AiOutlineMail } from 'react-icons/ai';
-import { ContactButton } from '../shared/ContactButton';
+import { SideBarNavButton } from '../shared/ContactButton';
+import { usePathname } from 'next/navigation';
+import { MdEmail } from 'react-icons/md';
+import { FaCirclePlus } from 'react-icons/fa6';
 
 interface SidebarProps {
   onContactClick?: () => void;
@@ -13,10 +15,11 @@ interface SidebarProps {
 
 export const Sidebar = ({ onContactClick }: SidebarProps) => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
+  const pathname = usePathname();
 
   return (
-    <aside className='relative w-full bg-navy text-white py-4 px-4 md:px-16 '>
-      <div className='flex items-center justify-between h-12'>
+    <aside className='flex items-center justify-center relative w-full bg-navy text-white py-4 px-4'>
+      <div className='flex items-center justify-between h-12 max-w-7xl w-full md:px-4'>
         {/* Título da sidebar */}
         <Logo iconSize={40} textSize='2' />
 
@@ -32,8 +35,26 @@ export const Sidebar = ({ onContactClick }: SidebarProps) => {
             />
           ))}
 
-          {/* Botão de contato */}
-          <ContactButton onContactClick={onContactClick} line />
+          {pathname === 'appointments' ? (
+            // Botão de contato
+            <SideBarNavButton
+              onContactClick={onContactClick}
+              line
+              icon={<MdEmail size={22} />}
+              text='Contato'
+            />
+          ) : (
+            // Botão para adicionar novo agendamento
+            <SideBarNavButton
+              onContactClick={() => {
+                const element = document.getElementById('past-auctions');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              line
+              icon={<FaCirclePlus size={22} />}
+              text='Adicionar'
+            />
+          )}
         </nav>
 
         {/* Ícone menu mobile */}
@@ -58,7 +79,11 @@ export const Sidebar = ({ onContactClick }: SidebarProps) => {
             />
           ))}
           {/* Botão de contato */}
-          <ContactButton onContactClick={onContactClick} />
+          <SideBarNavButton
+            onContactClick={onContactClick}
+            icon={<MdEmail size={22} />}
+            text='Contato'
+          />
         </nav>
       )}
     </aside>

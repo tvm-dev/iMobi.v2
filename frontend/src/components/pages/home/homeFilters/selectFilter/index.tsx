@@ -16,7 +16,7 @@ export const SelectFilter = ({
       <div className='flex flex-row gap-2 items-center justify-items-start'>
         {icon} <span>{label}</span>
       </div>
-      <select className='w-full text-black border border-zinc-200 p-3 pr-10 rounded-xl text-init outline-none focus:border-blue-400 transition-all'>
+      <select className='w-full text-black border border-zinc-200 p-3 pr-10 rounded-xl text-init outline-none focus:border-blue-400 transition-all duration-300'>
         <option value=''>{initOptionText}</option>
       </select>
     </div>
