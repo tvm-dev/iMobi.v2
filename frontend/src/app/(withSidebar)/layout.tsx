@@ -1,6 +1,6 @@
 'use client';
 import { Footer } from '@/components/layout/footer';
-import { Sidebar } from '@/components/layout/Sidebar';
+import { Sidebar } from '@/components/layout/sidebar';
 import { useRef } from 'react';
 
 export default function RootLayout({

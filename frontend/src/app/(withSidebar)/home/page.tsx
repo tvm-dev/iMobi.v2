@@ -3,7 +3,6 @@ import FileUploader from '@/components/pages/home/fileUploader';
 import { HomeFilters } from '@/components/pages/home/homeFilters';
 import { HomeTable } from '@/components/pages/home/homeTable';
 import { Title } from '@/components/shared/Title';
-import { Card } from '@/components/ui/card';
 
 export default function DashboardPage() {
   return (

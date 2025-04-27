@@ -3,11 +3,11 @@ import { NAV_LINKS } from '@/shared/constants/navLinks';
 import { CustomLink } from '@/components/ui/customLink';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
-import { Logo } from '../shared/Logo';
-import { SideBarNavButton } from '../shared/ContactButton';
-import { usePathname } from 'next/navigation';
+import { Logo } from '../../shared/Logo';
+import { SideBarNavButton } from '../../shared/ContactButton';
 import { MdEmail } from 'react-icons/md';
-import { FaCirclePlus } from 'react-icons/fa6';
+import { FaSignInAlt } from 'react-icons/fa';
+import { ExtraButton } from './extraButton';
 
 interface SidebarProps {
   onContactClick?: () => void;
@@ -15,7 +15,6 @@ interface SidebarProps {
 
 export const Sidebar = ({ onContactClick }: SidebarProps) => {
   const [openSidebar, setOpenSidebar] = useState<boolean>(false);
-  const pathname = usePathname();
 
   return (
     <aside className='flex items-center justify-center relative w-full bg-navy text-white py-4 px-4'>
@@ -35,28 +34,17 @@ export const Sidebar = ({ onContactClick }: SidebarProps) => {
             />
           ))}
 
-          {pathname === 'appointments' ? (
-            // Botão de contato
-            <SideBarNavButton
-              onContactClick={onContactClick}
-              line
-              icon={<MdEmail size={22} />}
-              text='Contato'
-            />
-          ) : (
-            // Botão para adicionar novo agendamento
-            <SideBarNavButton
-              onContactClick={() => {
-                const element = document.getElementById('past-auctions');
-                element?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              line
-              icon={<FaCirclePlus size={22} />}
-              text='Adicionar'
-            />
-          )}
-        </nav>
+          {/* Botão de contato e adicionar Agendamento */}
+          <ExtraButton onContactClick={onContactClick} />
 
+          {/* Botão de login e sair */}
+          <CustomLink
+            href={'/signin'}
+            icon={<FaSignInAlt size={22} />}
+            label={'Login'}
+            line
+          />
+        </nav>
         {/* Ícone menu mobile */}
         <div className='flex md:hidden'>
           <GiHamburgerMenu
@@ -78,12 +66,8 @@ export const Sidebar = ({ onContactClick }: SidebarProps) => {
               label={nav.label}
             />
           ))}
-          {/* Botão de contato */}
-          <SideBarNavButton
-            onContactClick={onContactClick}
-            icon={<MdEmail size={22} />}
-            text='Contato'
-          />
+          {/* Botão de contato e adicionar Agendamento */}
+          <ExtraButton onContactClick={onContactClick} />
         </nav>
       )}
     </aside>
