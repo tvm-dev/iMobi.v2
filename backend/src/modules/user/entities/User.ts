@@ -58,7 +58,7 @@ export class User {
   // To compare
 
   get emailCompare(): string {
-    return this.props.email;
+    return this.props.emailCompare;
   }
 
   set emailCompare(emailCompare: string) {

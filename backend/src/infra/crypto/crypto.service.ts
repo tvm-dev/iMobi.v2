@@ -1,5 +1,10 @@
 import * as bcrypt from 'bcrypt';
-import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
+import {
+  randomBytes,
+  createCipheriv,
+  createDecipheriv,
+  createHash,
+} from 'crypto';
 
 const ALGORITHM = 'aes-256-cbc'; // Algoritmo de criptografia
 
@@ -32,14 +37,27 @@ export class CryptoService {
     return decrypted;
   }
 
-  // Faz o hash (para comparação)
-  static async hash(text: string): Promise<string> {
-    const salt = await bcrypt.genSalt();
-    return await bcrypt.hash(text, salt);
+  // Faz o hash SHA-256 (para comparação)
+  static hashForCompare(text: string): string {
+    return createHash('sha256').update(text.trim().toLowerCase()).digest('hex');
   }
 
-  // Compara um valor com o hash
-  static async compare(text: string, hash: string): Promise<boolean> {
-    return await bcrypt.compare(text, hash);
+  // Compara um valor com o hash SHA-256
+  static compareHash(email: string, emailCompareHash: string): boolean {
+    return CryptoService.hashForCompare(email) === emailCompareHash;
+  }
+
+  // Faz o hash bcrypt (para senhas)
+  static async hashPassword(password: string): Promise<string> {
+    const salt = await bcrypt.genSalt();
+    return await bcrypt.hash(password, salt);
+  }
+
+  // Compara um valor com o hash bcrypt
+  static async comparePassword(
+    password: string,
+    passwordHash: string,
+  ): Promise<boolean> {
+    return await bcrypt.compare(password, passwordHash);
   }
 }

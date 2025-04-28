@@ -15,13 +15,19 @@ export class CreateUserUseCase {
 
   async execute({ email, name, password }: CreateUserRequest) {
     const user = new User({
+      // email: email,
+      // name: name,
+      // password: await CryptoService.hashPassword(password),
+      // emailCompare: email + '1',
+      // nameCompare: name + '1',
       email: CryptoService.encrypt(email),
       name: CryptoService.encrypt(name),
-      password: CryptoService.encrypt(password),
-      emailCompare: await CryptoService.hash(email),
-      nameCompare: await CryptoService.hash(name),
+      password: await CryptoService.hashPassword(password),
+      emailCompare: CryptoService.hashForCompare(email),
+      nameCompare: CryptoService.hashForCompare(name),
     });
-
+    console.log(email);
+    console.log(CryptoService.hashForCompare(email));
     await this.userRepository.create(user);
 
     return user;

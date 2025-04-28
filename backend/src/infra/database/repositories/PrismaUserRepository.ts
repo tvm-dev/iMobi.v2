@@ -3,6 +3,8 @@ import { UserRepository } from 'src/modules/user/repositories/UserRepository';
 import { PrismaService } from '../prisma.service';
 import { PrismaUserMapper } from '../mappers/PrismaUserMapper';
 import { Injectable } from '@nestjs/common';
+import { generateEmailCompare } from 'src/utils/generateCompare';
+import { CryptoService } from 'src/infra/crypto/crypto.service';
 
 @Injectable()
 export class PrismaUserRepository implements UserRepository {
@@ -17,12 +19,15 @@ export class PrismaUserRepository implements UserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
+    const emailCompareHash = CryptoService.hashForCompare(email);
+    console.log(emailCompareHash);
+    console.log(email);
     const user = await this.prisma.user.findUnique({
       where: {
-        email,
+        emailCompare: emailCompareHash,
       },
     });
-
+    console.log('user', user);
     if (!user) return null;
 
     return PrismaUserMapper.toDomain(user);

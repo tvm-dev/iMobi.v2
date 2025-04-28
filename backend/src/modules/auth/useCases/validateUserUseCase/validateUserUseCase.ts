@@ -14,12 +14,12 @@ export class ValidateUserUseCase {
   async execute({ email, password }: ValidateUserRequest) {
     const user = await this.userRepository.findByEmail(email);
 
-    if (!user) throw new UnauthorizedException('Email ou senha incorretos');
+    if (!user) throw new UnauthorizedException('Email ou  incorretos');
 
     const isPasswordMatched = await compare(password, user.password);
 
     if (!isPasswordMatched)
-      throw new UnauthorizedException('Email ou senha incorretos');
+      throw new UnauthorizedException(' ou senha incorretos');
 
     return user;
   }
