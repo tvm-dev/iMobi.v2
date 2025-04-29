@@ -3,7 +3,6 @@ import { UserRepository } from 'src/modules/user/repositories/UserRepository';
 import { PrismaService } from '../prisma.service';
 import { PrismaUserMapper } from '../mappers/PrismaUserMapper';
 import { Injectable } from '@nestjs/common';
-import { generateEmailCompare } from 'src/utils/generateCompare';
 import { CryptoService } from 'src/infra/crypto/crypto.service';
 
 @Injectable()

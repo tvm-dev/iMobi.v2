@@ -4,11 +4,13 @@ import { JwtAuthGuard } from './infra/http/modules/auth/guards/jwtAuth.Guard';
 import { UserModule } from './infra/http/modules/user/user.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './infra/http/modules/auth/auth.module';
+import { AppointmentModule } from './infra/http/modules/appointment/appointment.module';
 
 @Module({
   imports: [
     UserModule,
     AuthModule,
+    AppointmentModule,
     ConfigModule.forRoot({
       isGlobal: true, // faz o .env ser carregado para toda a aplicação
     }),

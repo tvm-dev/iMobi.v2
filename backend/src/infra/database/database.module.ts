@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { UserRepository } from 'src/modules/user/repositories/UserRepository';
 import { PrismaUserRepository } from './repositories/PrismaUserRepository';
+import { AppointmentRepository } from 'src/modules/appointment/repositories/AppointmentRepository';
+import { PrismaAppointmentRepository } from './repositories/PrismaAppointmentRepository';
 
 @Module({
   providers: [
@@ -10,7 +12,11 @@ import { PrismaUserRepository } from './repositories/PrismaUserRepository';
       provide: UserRepository,
       useClass: PrismaUserRepository,
     },
+    {
+      provide: AppointmentRepository,
+      useClass: PrismaAppointmentRepository,
+    },
   ],
-  exports: [UserRepository],
+  exports: [UserRepository, AppointmentRepository],
 })
 export class DatabaseModule {}
