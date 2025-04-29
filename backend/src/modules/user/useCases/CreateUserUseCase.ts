@@ -21,8 +21,7 @@ export class CreateUserUseCase {
       emailCompare: CryptoService.hashForCompare(email),
       nameCompare: CryptoService.hashForCompare(name),
     });
-    console.log(email);
-    console.log(CryptoService.hashForCompare(email));
+
     await this.userRepository.create(user);
 
     return user;

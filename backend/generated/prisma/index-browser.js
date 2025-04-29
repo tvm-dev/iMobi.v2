@@ -129,8 +129,8 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.AppointmentScalarFieldEnum = {
-  id: 'id',
   userId: 'userId',
+  appointmentNumber: 'appointmentNumber',
   description: 'description',
   location: 'location',
   link: 'link',

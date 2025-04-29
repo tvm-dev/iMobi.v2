@@ -19,14 +19,12 @@ export class PrismaUserRepository implements UserRepository {
 
   async findByEmail(email: string): Promise<User | null> {
     const emailCompareHash = CryptoService.hashForCompare(email);
-    console.log(emailCompareHash);
-    console.log(email);
     const user = await this.prisma.user.findUnique({
       where: {
         emailCompare: emailCompareHash,
       },
     });
-    console.log('user', user);
+
     if (!user) return null;
 
     return PrismaUserMapper.toDomain(user);

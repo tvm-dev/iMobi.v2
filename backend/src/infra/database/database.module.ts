@@ -17,6 +17,6 @@ import { PrismaAppointmentRepository } from './repositories/PrismaAppointmentRep
       useClass: PrismaAppointmentRepository,
     },
   ],
-  exports: [UserRepository, AppointmentRepository],
+  exports: [UserRepository, AppointmentRepository, PrismaService],
 })
 export class DatabaseModule {}

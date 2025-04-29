@@ -7,7 +7,7 @@ export class PrismaAppointmentMapper {
       actions: appointment.actions,
       createdAt: appointment.createdAt,
       description: appointment.description,
-      id: appointment.id,
+      appointmentNumber: appointment.appointmentNumber,
       link: appointment.link,
       location: appointment.location,
       status: appointment.status,
@@ -28,7 +28,7 @@ export class PrismaAppointmentMapper {
         updatedAt: appointment.updatedAt,
         userId: appointment.userId,
       },
-      appointment.id,
+      appointment.appointmentNumber,
     );
   }
 }

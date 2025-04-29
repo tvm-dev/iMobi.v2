@@ -1,4 +1,3 @@
-import { randomUUID } from 'crypto';
 import { Replace } from 'src/utils/replace';
 
 interface AppointmentSchema {
@@ -8,37 +7,34 @@ interface AppointmentSchema {
   link: string;
   status: string;
   actions: string;
-
   createdAt: Date;
   updatedAt: Date;
 }
 
 export class Appointment {
   private props: AppointmentSchema;
-  private _id: string;
+  private _appointmentNumber: string;
 
   constructor(
     props: Replace<AppointmentSchema, { createdAt?: Date; updatedAt?: Date }>,
-    id?: string,
+    appointmentNumber: string,
   ) {
     this.props = {
       ...props,
-      createdAt: props.createdAt || new Date(),
-      updatedAt: props.updatedAt || new Date(),
+      createdAt: props.createdAt ?? new Date(),
+      updatedAt: props.updatedAt ?? new Date(),
     };
-    this._id = id || randomUUID();
+    this._appointmentNumber = appointmentNumber;
   }
 
-  get id(): string {
-    return this._id;
-  }
-
-  // UserId
   get userId(): string {
     return this.props.userId;
   }
 
-  // Description
+  get appointmentNumber(): string {
+    return this._appointmentNumber;
+  }
+
   get description(): string {
     return this.props.description;
   }
@@ -47,7 +43,6 @@ export class Appointment {
     this.props.description = description;
   }
 
-  // location
   get location(): string {
     return this.props.location;
   }
@@ -56,34 +51,30 @@ export class Appointment {
     this.props.location = location;
   }
 
-  // link
   get link(): string {
-    return this.props.location;
+    return this.props.link;
   }
 
   set link(link: string) {
     this.props.link = link;
   }
 
-  // status
   get status(): string {
-    return this.props.location;
+    return this.props.status;
   }
 
   set status(status: string) {
     this.props.status = status;
   }
 
-  // actions
   get actions(): string {
-    return this.props.location;
+    return this.props.actions;
   }
 
   set actions(actions: string) {
     this.props.actions = actions;
   }
 
-  // Date
   get createdAt(): Date {
     return this.props.createdAt;
   }

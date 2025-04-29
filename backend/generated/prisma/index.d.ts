@@ -2110,8 +2110,8 @@ export namespace Prisma {
   }
 
   export type AppointmentMinAggregateOutputType = {
-    id: string | null
     userId: string | null
+    appointmentNumber: string | null
     description: string | null
     location: string | null
     link: string | null
@@ -2122,8 +2122,8 @@ export namespace Prisma {
   }
 
   export type AppointmentMaxAggregateOutputType = {
-    id: string | null
     userId: string | null
+    appointmentNumber: string | null
     description: string | null
     location: string | null
     link: string | null
@@ -2134,8 +2134,8 @@ export namespace Prisma {
   }
 
   export type AppointmentCountAggregateOutputType = {
-    id: number
     userId: number
+    appointmentNumber: number
     description: number
     location: number
     link: number
@@ -2148,8 +2148,8 @@ export namespace Prisma {
 
 
   export type AppointmentMinAggregateInputType = {
-    id?: true
     userId?: true
+    appointmentNumber?: true
     description?: true
     location?: true
     link?: true
@@ -2160,8 +2160,8 @@ export namespace Prisma {
   }
 
   export type AppointmentMaxAggregateInputType = {
-    id?: true
     userId?: true
+    appointmentNumber?: true
     description?: true
     location?: true
     link?: true
@@ -2172,8 +2172,8 @@ export namespace Prisma {
   }
 
   export type AppointmentCountAggregateInputType = {
-    id?: true
     userId?: true
+    appointmentNumber?: true
     description?: true
     location?: true
     link?: true
@@ -2257,8 +2257,8 @@ export namespace Prisma {
   }
 
   export type AppointmentGroupByOutputType = {
-    id: string
     userId: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -2286,8 +2286,8 @@ export namespace Prisma {
 
 
   export type AppointmentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     userId?: boolean
+    appointmentNumber?: boolean
     description?: boolean
     location?: boolean
     link?: boolean
@@ -2299,8 +2299,8 @@ export namespace Prisma {
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     userId?: boolean
+    appointmentNumber?: boolean
     description?: boolean
     location?: boolean
     link?: boolean
@@ -2312,8 +2312,8 @@ export namespace Prisma {
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
     userId?: boolean
+    appointmentNumber?: boolean
     description?: boolean
     location?: boolean
     link?: boolean
@@ -2325,8 +2325,8 @@ export namespace Prisma {
   }, ExtArgs["result"]["appointment"]>
 
   export type AppointmentSelectScalar = {
-    id?: boolean
     userId?: boolean
+    appointmentNumber?: boolean
     description?: boolean
     location?: boolean
     link?: boolean
@@ -2336,7 +2336,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "description" | "location" | "link" | "status" | "actions" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "appointmentNumber" | "description" | "location" | "link" | "status" | "actions" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2353,8 +2353,8 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
       userId: string
+      appointmentNumber: string
       description: string
       location: string
       link: string
@@ -2445,8 +2445,8 @@ export namespace Prisma {
      * // Get first 10 Appointments
      * const appointments = await prisma.appointment.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const appointmentWithIdOnly = await prisma.appointment.findMany({ select: { id: true } })
+     * // Only select the `userId`
+     * const appointmentWithUserIdOnly = await prisma.appointment.findMany({ select: { userId: true } })
      * 
      */
     findMany<T extends AppointmentFindManyArgs>(args?: SelectSubset<T, AppointmentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2490,9 +2490,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Create many Appointments and only return the `id`
-     * const appointmentWithIdOnly = await prisma.appointment.createManyAndReturn({
-     *   select: { id: true },
+     * // Create many Appointments and only return the `userId`
+     * const appointmentWithUserIdOnly = await prisma.appointment.createManyAndReturn({
+     *   select: { userId: true },
      *   data: [
      *     // ... provide data here
      *   ]
@@ -2581,9 +2581,9 @@ export namespace Prisma {
      *   ]
      * })
      * 
-     * // Update zero or more Appointments and only return the `id`
-     * const appointmentWithIdOnly = await prisma.appointment.updateManyAndReturn({
-     *   select: { id: true },
+     * // Update zero or more Appointments and only return the `userId`
+     * const appointmentWithUserIdOnly = await prisma.appointment.updateManyAndReturn({
+     *   select: { userId: true },
      *   where: {
      *     // ... provide filter here
      *   },
@@ -2786,8 +2786,8 @@ export namespace Prisma {
    * Fields of the Appointment model
    */
   interface AppointmentFieldRefs {
-    readonly id: FieldRef<"Appointment", 'String'>
     readonly userId: FieldRef<"Appointment", 'String'>
+    readonly appointmentNumber: FieldRef<"Appointment", 'String'>
     readonly description: FieldRef<"Appointment", 'String'>
     readonly location: FieldRef<"Appointment", 'String'>
     readonly link: FieldRef<"Appointment", 'String'>
@@ -3238,8 +3238,8 @@ export namespace Prisma {
 
 
   export const AppointmentScalarFieldEnum: {
-    id: 'id',
     userId: 'userId',
+    appointmentNumber: 'appointmentNumber',
     description: 'description',
     location: 'location',
     link: 'link',
@@ -3392,8 +3392,8 @@ export namespace Prisma {
     AND?: AppointmentWhereInput | AppointmentWhereInput[]
     OR?: AppointmentWhereInput[]
     NOT?: AppointmentWhereInput | AppointmentWhereInput[]
-    id?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
+    appointmentNumber?: StringFilter<"Appointment"> | string
     description?: StringFilter<"Appointment"> | string
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
@@ -3405,8 +3405,8 @@ export namespace Prisma {
   }
 
   export type AppointmentOrderByWithRelationInput = {
-    id?: SortOrder
     userId?: SortOrder
+    appointmentNumber?: SortOrder
     description?: SortOrder
     location?: SortOrder
     link?: SortOrder
@@ -3418,11 +3418,12 @@ export namespace Prisma {
   }
 
   export type AppointmentWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    userId_appointmentNumber?: AppointmentUserIdAppointmentNumberCompoundUniqueInput
     AND?: AppointmentWhereInput | AppointmentWhereInput[]
     OR?: AppointmentWhereInput[]
     NOT?: AppointmentWhereInput | AppointmentWhereInput[]
     userId?: StringFilter<"Appointment"> | string
+    appointmentNumber?: StringFilter<"Appointment"> | string
     description?: StringFilter<"Appointment"> | string
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
@@ -3431,11 +3432,11 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id" | "id">
+  }, "userId_appointmentNumber">
 
   export type AppointmentOrderByWithAggregationInput = {
-    id?: SortOrder
     userId?: SortOrder
+    appointmentNumber?: SortOrder
     description?: SortOrder
     location?: SortOrder
     link?: SortOrder
@@ -3452,8 +3453,8 @@ export namespace Prisma {
     AND?: AppointmentScalarWhereWithAggregatesInput | AppointmentScalarWhereWithAggregatesInput[]
     OR?: AppointmentScalarWhereWithAggregatesInput[]
     NOT?: AppointmentScalarWhereWithAggregatesInput | AppointmentScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Appointment"> | string
     userId?: StringWithAggregatesFilter<"Appointment"> | string
+    appointmentNumber?: StringWithAggregatesFilter<"Appointment"> | string
     description?: StringWithAggregatesFilter<"Appointment"> | string
     location?: StringWithAggregatesFilter<"Appointment"> | string
     link?: StringWithAggregatesFilter<"Appointment"> | string
@@ -3545,7 +3546,7 @@ export namespace Prisma {
   }
 
   export type AppointmentCreateInput = {
-    id?: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -3557,8 +3558,8 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedCreateInput = {
-    id?: string
     userId: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -3569,7 +3570,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -3581,8 +3582,8 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -3593,8 +3594,8 @@ export namespace Prisma {
   }
 
   export type AppointmentCreateManyInput = {
-    id?: string
     userId: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -3605,7 +3606,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -3616,8 +3617,8 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -3733,9 +3734,14 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type AppointmentUserIdAppointmentNumberCompoundUniqueInput = {
+    userId: string
+    appointmentNumber: string
+  }
+
   export type AppointmentCountOrderByAggregateInput = {
-    id?: SortOrder
     userId?: SortOrder
+    appointmentNumber?: SortOrder
     description?: SortOrder
     location?: SortOrder
     link?: SortOrder
@@ -3746,8 +3752,8 @@ export namespace Prisma {
   }
 
   export type AppointmentMaxOrderByAggregateInput = {
-    id?: SortOrder
     userId?: SortOrder
+    appointmentNumber?: SortOrder
     description?: SortOrder
     location?: SortOrder
     link?: SortOrder
@@ -3758,8 +3764,8 @@ export namespace Prisma {
   }
 
   export type AppointmentMinOrderByAggregateInput = {
-    id?: SortOrder
     userId?: SortOrder
+    appointmentNumber?: SortOrder
     description?: SortOrder
     location?: SortOrder
     link?: SortOrder
@@ -3901,7 +3907,7 @@ export namespace Prisma {
   }
 
   export type AppointmentCreateWithoutUserInput = {
-    id?: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -3912,7 +3918,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedCreateWithoutUserInput = {
-    id?: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -3952,8 +3958,8 @@ export namespace Prisma {
     AND?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
     OR?: AppointmentScalarWhereInput[]
     NOT?: AppointmentScalarWhereInput | AppointmentScalarWhereInput[]
-    id?: StringFilter<"Appointment"> | string
     userId?: StringFilter<"Appointment"> | string
+    appointmentNumber?: StringFilter<"Appointment"> | string
     description?: StringFilter<"Appointment"> | string
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
@@ -4024,7 +4030,7 @@ export namespace Prisma {
   }
 
   export type AppointmentCreateManyUserInput = {
-    id?: string
+    appointmentNumber: string
     description: string
     location: string
     link: string
@@ -4035,7 +4041,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -4046,7 +4052,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
@@ -4057,7 +4063,7 @@ export namespace Prisma {
   }
 
   export type AppointmentUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    appointmentNumber?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string

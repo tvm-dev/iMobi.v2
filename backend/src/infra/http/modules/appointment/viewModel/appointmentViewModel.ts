@@ -9,6 +9,7 @@ export class AppointmentViewModel {
     location,
     status,
     updatedAt,
+    appointmentNumber,
   }: Appointment) {
     return {
       actions,
@@ -16,6 +17,7 @@ export class AppointmentViewModel {
       link,
       location,
       status,
+      appointmentNumber,
       date: createdAt.toLocaleDateString('pt-BR'), // <-- formata data
       hour: createdAt.toLocaleTimeString('pt-BR', {
         hour: '2-digit',
