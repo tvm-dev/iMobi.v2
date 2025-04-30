@@ -94,4 +94,29 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     });
     return appointments.map(PrismaAppointmentMapper.toDomain);
   }
+
+  // Update
+  async updateOne(
+    userId: string,
+    id: string,
+    data: Partial<Appointment>,
+  ): Promise<Appointment | null> {
+    const appointment = await this.prisma.appointment.update({
+      where: { userId_appointmentNumber: { userId, appointmentNumber: id } },
+      data,
+    });
+
+    if (!appointment) return null;
+
+    return PrismaAppointmentMapper.toDomain(appointment);
+  }
+
+  // delete
+  async deleteOne(userId: string, id: string) {
+    await this.prisma.appointment.delete({
+      where: { userId_appointmentNumber: { appointmentNumber: id, userId } },
+    });
+
+    return null;
+  }
 }

@@ -1,8 +1,11 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpCode,
   Param,
+  Patch,
   Post,
   Query,
   Request,
@@ -14,6 +17,9 @@ import { AppointmentViewModel } from './viewModel/appointmentViewModel';
 import { GetAppointmentUseCase } from 'src/modules/appointment/useCases/GetAppointment';
 import { GetManyAppointmentUseCase } from 'src/modules/appointment/useCases/GetManyAppointmentUseCase';
 import { GetManyDataAppointmentUseCase } from 'src/modules/appointment/useCases/GetManyDataAppointmentUseCase';
+import { DeleteAppointmentUseCase } from 'src/modules/appointment/useCases/DeleteAppointmentUseCase';
+import { Appointment } from 'src/modules/appointment/entities/Appointment';
+import { UpdateAppointmentUseCase } from 'src/modules/appointment/useCases/UpdateAppointmentUseCase';
 
 @Controller('appointment')
 export class AppointmentController {
@@ -22,6 +28,8 @@ export class AppointmentController {
     private getAppointmentUseCase: GetAppointmentUseCase,
     private getManyAppointmentUseCase: GetManyAppointmentUseCase,
     private getManyDataAppointmentUseCase: GetManyDataAppointmentUseCase,
+    private deleteAppointmentUseCase: DeleteAppointmentUseCase,
+    private updateAppointmentUseCase: UpdateAppointmentUseCase,
   ) {}
 
   @Post()
@@ -70,5 +78,31 @@ export class AppointmentController {
     const appointment = await this.getManyAppointmentUseCase.execute(userId);
 
     return appointment.map(AppointmentViewModel.toHttp);
+  }
+
+  // Update
+  @Patch(':appointmentNumber')
+  async update(
+    @Param('appointmentNumber') appointmentNumber: string,
+    @Body() body: Partial<Appointment>,
+    @Request() request: AuthenticatedRequestModel,
+  ): Promise<Appointment> {
+    const userId = request.user.id;
+    return this.updateAppointmentUseCase.execute(
+      userId,
+      appointmentNumber,
+      body,
+    );
+  }
+
+  // Delete
+  @Delete(':id')
+  @HttpCode(204)
+  async deleteAppointment(
+    @Param('id') id: string,
+    @Request() request: AuthenticatedRequestModel,
+  ) {
+    const userId = request.user.id;
+    await this.deleteAppointmentUseCase.execute(userId, id);
   }
 }

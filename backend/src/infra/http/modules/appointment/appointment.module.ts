@@ -5,6 +5,8 @@ import { CreateAppointmentUseCase } from 'src/modules/appointment/useCases/Creat
 import { GetAppointmentUseCase } from 'src/modules/appointment/useCases/GetAppointment';
 import { GetManyAppointmentUseCase } from 'src/modules/appointment/useCases/GetManyAppointmentUseCase';
 import { GetManyDataAppointmentUseCase } from 'src/modules/appointment/useCases/GetManyDataAppointmentUseCase';
+import { DeleteAppointmentUseCase } from 'src/modules/appointment/useCases/DeleteAppointmentUseCase';
+import { UpdateAppointmentUseCase } from 'src/modules/appointment/useCases/UpdateAppointmentUseCase';
 
 @Module({
   imports: [DatabaseModule],
@@ -14,6 +16,8 @@ import { GetManyDataAppointmentUseCase } from 'src/modules/appointment/useCases/
     GetAppointmentUseCase,
     GetManyAppointmentUseCase,
     GetManyDataAppointmentUseCase,
+    DeleteAppointmentUseCase,
+    UpdateAppointmentUseCase,
   ],
   exports: [DatabaseModule],
 })
