@@ -8,7 +8,9 @@ interface CreateAppointmentRequest {
   location: string;
   link: string;
   status: string;
-  actions: string;
+  date: Date;
+  hour: string;
+  observations: string;
 }
 
 @Injectable()
@@ -16,7 +18,9 @@ export class CreateAppointmentUseCase {
   constructor(private appointmentRepository: AppointmentRepository) {}
 
   async execute({
-    actions,
+    date,
+    hour,
+    observations,
     description,
     link,
     location,
@@ -34,7 +38,9 @@ export class CreateAppointmentUseCase {
     // Criar uma nova instância de Appointment com o número calculado
     const appointment = new Appointment(
       {
-        actions,
+        date,
+        hour,
+        observations,
         description,
         link,
         location,

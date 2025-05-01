@@ -2,7 +2,9 @@ import { Appointment } from 'generated/prisma';
 
 export class AppointmentViewModel {
   static toHttp({
-    actions,
+    date,
+    hour,
+    observations,
     createdAt,
     description,
     link,
@@ -12,17 +14,14 @@ export class AppointmentViewModel {
     appointmentNumber,
   }: Appointment) {
     return {
-      actions,
       description,
       link,
+      observations,
       location,
       status,
       appointmentNumber,
-      date: createdAt.toLocaleDateString('pt-BR'), // <-- formata data
-      hour: createdAt.toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit',
-      }), // <-- formata hora
+      date: date.toLocaleDateString('pt-BR'), // <-- formata data
+      hour: hour,
       createdAt,
       updatedAt,
     };

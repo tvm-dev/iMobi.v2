@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import { IsDate, IsNotEmpty, IsString } from 'class-validator';
 
 export class createAppointmentBody {
   @IsString()
@@ -19,5 +20,14 @@ export class createAppointmentBody {
 
   @IsString()
   @IsNotEmpty()
-  actions: string;
+  observations: string;
+
+  @IsDate()
+  @IsNotEmpty()
+  @Type(() => Date)
+  date: Date;
+
+  @IsString()
+  @IsNotEmpty()
+  hour: string;
 }

@@ -2116,7 +2116,9 @@ export namespace Prisma {
     location: string | null
     link: string | null
     status: string | null
-    actions: string | null
+    observations: string | null
+    date: Date | null
+    hour: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2128,7 +2130,9 @@ export namespace Prisma {
     location: string | null
     link: string | null
     status: string | null
-    actions: string | null
+    observations: string | null
+    date: Date | null
+    hour: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2140,7 +2144,9 @@ export namespace Prisma {
     location: number
     link: number
     status: number
-    actions: number
+    observations: number
+    date: number
+    hour: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -2154,7 +2160,9 @@ export namespace Prisma {
     location?: true
     link?: true
     status?: true
-    actions?: true
+    observations?: true
+    date?: true
+    hour?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2166,7 +2174,9 @@ export namespace Prisma {
     location?: true
     link?: true
     status?: true
-    actions?: true
+    observations?: true
+    date?: true
+    hour?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2178,7 +2188,9 @@ export namespace Prisma {
     location?: true
     link?: true
     status?: true
-    actions?: true
+    observations?: true
+    date?: true
+    hour?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2263,7 +2275,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations: string
+    date: Date
+    hour: string
     createdAt: Date
     updatedAt: Date
     _count: AppointmentCountAggregateOutputType | null
@@ -2292,7 +2306,9 @@ export namespace Prisma {
     location?: boolean
     link?: boolean
     status?: boolean
-    actions?: boolean
+    observations?: boolean
+    date?: boolean
+    hour?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2305,7 +2321,9 @@ export namespace Prisma {
     location?: boolean
     link?: boolean
     status?: boolean
-    actions?: boolean
+    observations?: boolean
+    date?: boolean
+    hour?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2318,7 +2336,9 @@ export namespace Prisma {
     location?: boolean
     link?: boolean
     status?: boolean
-    actions?: boolean
+    observations?: boolean
+    date?: boolean
+    hour?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2331,12 +2351,14 @@ export namespace Prisma {
     location?: boolean
     link?: boolean
     status?: boolean
-    actions?: boolean
+    observations?: boolean
+    date?: boolean
+    hour?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "appointmentNumber" | "description" | "location" | "link" | "status" | "actions" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"userId" | "appointmentNumber" | "description" | "location" | "link" | "status" | "observations" | "date" | "hour" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2359,7 +2381,9 @@ export namespace Prisma {
       location: string
       link: string
       status: string
-      actions: string
+      observations: string
+      date: Date
+      hour: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["appointment"]>
@@ -2792,7 +2816,9 @@ export namespace Prisma {
     readonly location: FieldRef<"Appointment", 'String'>
     readonly link: FieldRef<"Appointment", 'String'>
     readonly status: FieldRef<"Appointment", 'String'>
-    readonly actions: FieldRef<"Appointment", 'String'>
+    readonly observations: FieldRef<"Appointment", 'String'>
+    readonly date: FieldRef<"Appointment", 'DateTime'>
+    readonly hour: FieldRef<"Appointment", 'String'>
     readonly createdAt: FieldRef<"Appointment", 'DateTime'>
     readonly updatedAt: FieldRef<"Appointment", 'DateTime'>
   }
@@ -3244,7 +3270,9 @@ export namespace Prisma {
     location: 'location',
     link: 'link',
     status: 'status',
-    actions: 'actions',
+    observations: 'observations',
+    date: 'date',
+    hour: 'hour',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -3398,7 +3426,9 @@ export namespace Prisma {
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
-    actions?: StringFilter<"Appointment"> | string
+    observations?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
+    hour?: StringFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3411,7 +3441,9 @@ export namespace Prisma {
     location?: SortOrder
     link?: SortOrder
     status?: SortOrder
-    actions?: SortOrder
+    observations?: SortOrder
+    date?: SortOrder
+    hour?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
@@ -3428,7 +3460,9 @@ export namespace Prisma {
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
-    actions?: StringFilter<"Appointment"> | string
+    observations?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
+    hour?: StringFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -3441,7 +3475,9 @@ export namespace Prisma {
     location?: SortOrder
     link?: SortOrder
     status?: SortOrder
-    actions?: SortOrder
+    observations?: SortOrder
+    date?: SortOrder
+    hour?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AppointmentCountOrderByAggregateInput
@@ -3459,7 +3495,9 @@ export namespace Prisma {
     location?: StringWithAggregatesFilter<"Appointment"> | string
     link?: StringWithAggregatesFilter<"Appointment"> | string
     status?: StringWithAggregatesFilter<"Appointment"> | string
-    actions?: StringWithAggregatesFilter<"Appointment"> | string
+    observations?: StringWithAggregatesFilter<"Appointment"> | string
+    date?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
+    hour?: StringWithAggregatesFilter<"Appointment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
   }
@@ -3551,7 +3589,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutAppointmentInput
@@ -3564,7 +3604,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3575,7 +3617,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutAppointmentNestedInput
@@ -3588,7 +3632,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3600,7 +3646,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3611,7 +3659,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3623,7 +3673,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -3746,7 +3798,9 @@ export namespace Prisma {
     location?: SortOrder
     link?: SortOrder
     status?: SortOrder
-    actions?: SortOrder
+    observations?: SortOrder
+    date?: SortOrder
+    hour?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3758,7 +3812,9 @@ export namespace Prisma {
     location?: SortOrder
     link?: SortOrder
     status?: SortOrder
-    actions?: SortOrder
+    observations?: SortOrder
+    date?: SortOrder
+    hour?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3770,7 +3826,9 @@ export namespace Prisma {
     location?: SortOrder
     link?: SortOrder
     status?: SortOrder
-    actions?: SortOrder
+    observations?: SortOrder
+    date?: SortOrder
+    hour?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -3912,7 +3970,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3923,7 +3983,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -3964,7 +4026,9 @@ export namespace Prisma {
     location?: StringFilter<"Appointment"> | string
     link?: StringFilter<"Appointment"> | string
     status?: StringFilter<"Appointment"> | string
-    actions?: StringFilter<"Appointment"> | string
+    observations?: StringFilter<"Appointment"> | string
+    date?: DateTimeFilter<"Appointment"> | Date | string
+    hour?: StringFilter<"Appointment"> | string
     createdAt?: DateTimeFilter<"Appointment"> | Date | string
     updatedAt?: DateTimeFilter<"Appointment"> | Date | string
   }
@@ -4035,7 +4099,9 @@ export namespace Prisma {
     location: string
     link: string
     status: string
-    actions: string
+    observations?: string
+    date?: Date | string
+    hour?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -4046,7 +4112,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4057,7 +4125,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -4068,7 +4138,9 @@ export namespace Prisma {
     location?: StringFieldUpdateOperationsInput | string
     link?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
-    actions?: StringFieldUpdateOperationsInput | string
+    observations?: StringFieldUpdateOperationsInput | string
+    date?: DateTimeFieldUpdateOperationsInput | Date | string
+    hour?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }

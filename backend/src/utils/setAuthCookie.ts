@@ -9,7 +9,7 @@ function parseExpire(exp: string): number {
 }
 
 export function setAuthCookie(response: Response, token: string) {
-  const expire = process.env.JWT_EXPIRE || '30m';
+  const expire = process.env.JWT_EXPIRE || '30d';
   const maxAge = parseExpire(expire);
 
   response.cookie('token', token, {

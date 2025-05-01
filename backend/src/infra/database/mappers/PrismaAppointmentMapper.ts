@@ -4,7 +4,9 @@ import { Appointment } from 'src/modules/appointment/entities/Appointment';
 export class PrismaAppointmentMapper {
   static toPrisma(appointment: Appointment): AppointmentRaw {
     return {
-      actions: appointment.actions,
+      date: appointment.date,
+      hour: appointment.hour,
+      observations: appointment.observations,
       createdAt: appointment.createdAt,
       description: appointment.description,
       appointmentNumber: appointment.appointmentNumber,
@@ -19,7 +21,9 @@ export class PrismaAppointmentMapper {
   static toDomain(appointment: AppointmentRaw): Appointment {
     return new Appointment(
       {
-        actions: appointment.actions,
+        date: appointment.date,
+        hour: appointment.hour,
+        observations: appointment.observations,
         createdAt: appointment.createdAt,
         description: appointment.description,
         link: appointment.link,

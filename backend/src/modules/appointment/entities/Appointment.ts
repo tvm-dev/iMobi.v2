@@ -6,7 +6,10 @@ interface AppointmentSchema {
   location: string;
   link: string;
   status: string;
-  actions: string;
+  observations: string;
+  date: Date;
+  hour: string;
+
   createdAt: Date;
   updatedAt: Date;
 }
@@ -67,12 +70,28 @@ export class Appointment {
     this.props.status = status;
   }
 
-  get actions(): string {
-    return this.props.actions;
+  get observations(): string {
+    return this.props.observations;
   }
 
-  set actions(actions: string) {
-    this.props.actions = actions;
+  set observations(observations: string) {
+    this.props.observations = observations;
+  }
+
+  get date(): Date {
+    return this.props.date;
+  }
+
+  set date(date: Date) {
+    this.props.date = date;
+  }
+
+  get hour(): string {
+    return this.props.hour;
+  }
+
+  set hour(hour: string) {
+    this.props.hour = hour;
   }
 
   get createdAt(): Date {

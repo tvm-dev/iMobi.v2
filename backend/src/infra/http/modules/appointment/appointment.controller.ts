@@ -20,6 +20,7 @@ import { GetManyDataAppointmentUseCase } from 'src/modules/appointment/useCases/
 import { DeleteAppointmentUseCase } from 'src/modules/appointment/useCases/DeleteAppointmentUseCase';
 import { Appointment } from 'src/modules/appointment/entities/Appointment';
 import { UpdateAppointmentUseCase } from 'src/modules/appointment/useCases/UpdateAppointmentUseCase';
+import { UpdateAppointmentBody } from './dtos/updateAppointmentBody';
 
 @Controller('appointment')
 export class AppointmentController {
@@ -81,18 +82,14 @@ export class AppointmentController {
   }
 
   // Update
-  @Patch(':appointmentNumber')
+  @Patch(':id')
   async update(
-    @Param('appointmentNumber') appointmentNumber: string,
-    @Body() body: Partial<Appointment>,
+    @Param('id') id: string,
+    @Body() body: UpdateAppointmentBody,
     @Request() request: AuthenticatedRequestModel,
   ): Promise<Appointment> {
     const userId = request.user.id;
-    return this.updateAppointmentUseCase.execute(
-      userId,
-      appointmentNumber,
-      body,
-    );
+    return this.updateAppointmentUseCase.execute(userId, id, body);
   }
 
   // Delete

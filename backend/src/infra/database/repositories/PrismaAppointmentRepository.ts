@@ -4,7 +4,6 @@ import { AppointmentRepository } from 'src/modules/appointment/repositories/Appo
 import { Appointment } from 'src/modules/appointment/entities/Appointment';
 import { PrismaAppointmentMapper } from '../mappers/PrismaAppointmentMapper';
 import { startOfDay, endOfDay, addDays } from 'date-fns';
-import { toZonedTime } from 'date-fns-tz';
 
 @Injectable()
 export class PrismaAppointmentRepository implements AppointmentRepository {
@@ -12,9 +11,9 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
 
   async create(appointment: Appointment): Promise<void> {
     const appointmentRaw = PrismaAppointmentMapper.toPrisma(appointment);
-
+    const data = { ...appointmentRaw, date: addDays(appointmentRaw.date, 1) };
     await this.prisma.appointment.create({
-      data: appointmentRaw,
+      data: data,
     });
   }
 
@@ -52,7 +51,7 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
   async getMany(userId: string): Promise<Appointment[] | null> {
     const appointments = await this.prisma.appointment.findMany({
       where: { userId },
-      orderBy: { appointmentNumber: 'desc' },
+      orderBy: { date: 'desc' },
     });
 
     if (!appointments) {
@@ -86,11 +85,9 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     const appointments = await this.prisma.appointment.findMany({
       where: {
         userId,
-        createdAt: dateFilter,
+        date: dateFilter,
       },
-      orderBy: {
-        appointmentNumber: 'desc',
-      },
+      orderBy: { date: 'desc' },
     });
     return appointments.map(PrismaAppointmentMapper.toDomain);
   }

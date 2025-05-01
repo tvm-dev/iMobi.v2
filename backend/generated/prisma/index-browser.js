@@ -135,7 +135,9 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   location: 'location',
   link: 'link',
   status: 'status',
-  actions: 'actions',
+  observations: 'observations',
+  date: 'date',
+  hour: 'hour',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
