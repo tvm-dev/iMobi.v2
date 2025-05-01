@@ -3,14 +3,24 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock } from 'lucide-react'; // ícones minimalistas
+import { api } from '@/shared/utils/api';
+import { useRouter } from 'next/navigation';
 
 export default function SignIn() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Lógica de login
+    try {
+      const response = await api.post('/signIn', { email, password });
+      router.push('/home');
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

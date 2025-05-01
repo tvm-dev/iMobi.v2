@@ -16,7 +16,7 @@ export default function DashboardPage() {
       <Appointments />
       {/* Adicionar novo leilão */}
       <div id='past-auctions'>
-        <PastAuctions />
+        <PastAuctions state='create' />
       </div>
 
       {/* Leilões Passados */}

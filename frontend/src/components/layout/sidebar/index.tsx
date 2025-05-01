@@ -1,11 +1,10 @@
 'use client';
 import { NAV_LINKS } from '@/shared/constants/navLinks';
 import { CustomLink } from '@/components/ui/customLink';
+import { LogoutButton } from '@/components/ui/logoutButton';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Logo } from '../../shared/Logo';
-import { SideBarNavButton } from '../../shared/ContactButton';
-import { MdEmail } from 'react-icons/md';
 import { FaSignInAlt } from 'react-icons/fa';
 import { ExtraButton } from './extraButton';
 
@@ -38,12 +37,7 @@ export const Sidebar = ({ onContactClick }: SidebarProps) => {
           <ExtraButton onContactClick={onContactClick} />
 
           {/* Botão de login e sair */}
-          <CustomLink
-            href={'/signin'}
-            icon={<FaSignInAlt size={22} />}
-            label={'Login'}
-            line
-          />
+          <LogoutButton line />
         </nav>
         {/* Ícone menu mobile */}
         <div className='flex md:hidden'>

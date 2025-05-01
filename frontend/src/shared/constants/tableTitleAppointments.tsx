@@ -4,5 +4,5 @@ export const tableTitlesAppointments = [
   'Local/Site',
   'Link',
   'Status',
-  'Ações',
+  // 'Ações',
 ];
