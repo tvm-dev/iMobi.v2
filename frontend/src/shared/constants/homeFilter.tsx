@@ -27,9 +27,9 @@ export const homeFilter = [
     label: 'Modalidade',
     initOptionText: 'Todas',
   },
-  {
-    icon: <FaSort />,
-    label: 'Ordenar por',
-    initOptionText: 'Padrão',
-  },
+  // {
+  //   icon: <FaSort />,
+  //   label: 'Ordenar por',
+  //   initOptionText: 'Padrão',
+  // },
 ];

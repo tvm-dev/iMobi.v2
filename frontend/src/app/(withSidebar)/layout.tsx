@@ -1,6 +1,7 @@
 'use client';
 import { Footer } from '@/components/layout/footer';
 import { Sidebar } from '@/components/layout/sidebar';
+import { AppointmentProvider } from '@/shared/contexts/AppointmentContext';
 import { useRef } from 'react';
 
 export default function RootLayout({
@@ -11,6 +12,7 @@ export default function RootLayout({
   const contactRef = useRef<HTMLDivElement>(null);
 
   return (
+    // <AppointmentProvider>
     <main className='flex flex-col justify-between min-h-screen w-full bg-sky-50/70'>
       <section>
         <Sidebar
@@ -22,5 +24,6 @@ export default function RootLayout({
       </section>
       <Footer ref={contactRef} />
     </main>
+    // </AppointmentProvider>
   );
 }

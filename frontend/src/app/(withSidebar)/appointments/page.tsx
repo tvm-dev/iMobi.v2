@@ -1,6 +1,4 @@
-import { Appointments } from '@/components/pages/appointments/appointments';
-import { OldAppointments } from '@/components/pages/appointments/oldAppointments';
-import { PastAuctions } from '@/components/pages/appointments/pastAuctions';
+import { AppointmentsTables } from '@/components/pages/appointments/appointmentsTables';
 import { Title } from '@/components/shared/Title';
 
 export default function DashboardPage() {
@@ -13,14 +11,7 @@ export default function DashboardPage() {
         line='center'
       />
       {/* Agendamentos */}
-      <Appointments />
-      {/* Adicionar novo leilão */}
-      <div id='past-auctions'>
-        <PastAuctions state='create' />
-      </div>
-
-      {/* Leilões Passados */}
-      <OldAppointments />
+      <AppointmentsTables />
     </div>
   );
 }

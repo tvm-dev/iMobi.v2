@@ -1,6 +1,6 @@
 'use client';
 import { ScheduledAuctions } from './scheduledAuctions';
-import { AppointmentTitle } from '../../../shared/AppointmentTitle';
+import { AppointmentTitle } from '../../../../shared/AppointmentTitle';
 import { FaCalendarCheck, FaCalendarDay, FaCalendarWeek } from 'react-icons/fa';
 
 export const Appointments = () => {

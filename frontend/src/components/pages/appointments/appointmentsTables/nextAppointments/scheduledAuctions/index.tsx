@@ -11,7 +11,7 @@ import { useAppointment } from '@/shared/hooks/appointmentHook';
 import { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
-import { PastAuctions } from '../../pastAuctions';
+import { PastAuctions } from '../../../pastAuctions';
 import { Appointment } from '@/shared/types/Appointment';
 import { deleteAuction } from './deleteAuction';
 
