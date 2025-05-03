@@ -74,7 +74,6 @@ export class PrismaAppointmentRepository implements AppointmentRepository {
     const end = endOfDay(nextDay); // 2025-04-30T23:59:59.999Z
 
     // Se quiser ver os valores no console:
-    console.log('Filtro UTC:', start.toISOString(), end.toISOString());
     const dateFilter =
       where === 'in'
         ? { gte: start, lte: end }

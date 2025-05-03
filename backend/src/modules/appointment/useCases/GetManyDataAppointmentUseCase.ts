@@ -10,7 +10,6 @@ export class GetManyDataAppointmentUseCase {
     data: string,
     where: 'in' | 'after' | 'before',
   ) {
-    console.log('teste', data, where);
     const appointments = await this.appointmentRepository.getManyByData(
       userId,
       data,

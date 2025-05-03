@@ -26,6 +26,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   appointment Appointment[]
+  property    Property[]
 }
 
 model Appointment {
@@ -45,4 +46,26 @@ model Appointment {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, appointmentNumber]) // Chave primária composta
+}
+
+model Property {
+  userId         String
+  propertyNumber String
+
+  UF          String
+  Cidade      String
+  Bairro      String
+  Endereço   String
+  Preço      String
+  Avaliação String
+  Desconto    String
+  Tipo        String
+  Modalidade  String
+  link        String @default("")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, propertyNumber]) // Chave primária composta
 }

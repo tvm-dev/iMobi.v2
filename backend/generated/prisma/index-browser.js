@@ -142,6 +142,23 @@ exports.Prisma.AppointmentScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PropertyScalarFieldEnum = {
+  userId: 'userId',
+  propertyNumber: 'propertyNumber',
+  UF: 'UF',
+  Cidade: 'Cidade',
+  Bairro: 'Bairro',
+  Endereço: 'Endereço',
+  Preço: 'Preço',
+  Avaliação: 'Avaliação',
+  Desconto: 'Desconto',
+  Tipo: 'Tipo',
+  Modalidade: 'Modalidade',
+  link: 'link',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -155,7 +172,8 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Appointment: 'Appointment'
+  Appointment: 'Appointment',
+  Property: 'Property'
 };
 
 /**

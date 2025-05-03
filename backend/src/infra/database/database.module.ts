@@ -4,6 +4,8 @@ import { UserRepository } from 'src/modules/user/repositories/UserRepository';
 import { PrismaUserRepository } from './repositories/PrismaUserRepository';
 import { AppointmentRepository } from 'src/modules/appointment/repositories/AppointmentRepository';
 import { PrismaAppointmentRepository } from './repositories/PrismaAppointmentRepository';
+import { PrismaPropertyRepository } from './repositories/PrismaPropertyRepository';
+import { PropertyRepository } from 'src/modules/property/repositories/PropertyRepository';
 
 @Module({
   providers: [
@@ -16,7 +18,16 @@ import { PrismaAppointmentRepository } from './repositories/PrismaAppointmentRep
       provide: AppointmentRepository,
       useClass: PrismaAppointmentRepository,
     },
+    {
+      provide: PropertyRepository,
+      useClass: PrismaPropertyRepository,
+    },
   ],
-  exports: [UserRepository, AppointmentRepository, PrismaService],
+  exports: [
+    UserRepository,
+    AppointmentRepository,
+    PropertyRepository,
+    PrismaService,
+  ],
 })
 export class DatabaseModule {}
