@@ -105,7 +105,7 @@ export const SignIn = () => {
         <div className='text-center mt-6 text-sm text-gray-600'>
           Ainda não tem acesso?{' '}
           <a
-            href='/signup'
+            href='/register'
             className='text-blue-600 hover:underline font-medium'
           >
             Crie sua conta

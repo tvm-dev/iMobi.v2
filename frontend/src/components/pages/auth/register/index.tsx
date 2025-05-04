@@ -139,7 +139,7 @@ export const SignUp = () => {
         <div className='text-center mt-6 text-sm text-gray-600'>
           Já possui uma conta?{' '}
           <a
-            href='/signin'
+            href='/login'
             className='text-blue-600 hover:underline font-medium'
           >
             Faça login

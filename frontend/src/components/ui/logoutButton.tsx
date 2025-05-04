@@ -30,7 +30,7 @@ export const LogoutButton = ({ line, className }: CustomLinkProps) => {
     }
   }
   return (
-    <Link href={'/signin'} className={cn('flex flex-col group')}>
+    <Link href={'/login'} className={cn('flex flex-col group')}>
       <div
         onClick={logout}
         className={cn(
