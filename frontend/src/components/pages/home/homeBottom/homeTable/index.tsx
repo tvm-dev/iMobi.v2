@@ -10,11 +10,14 @@ import {
 import { tableTitles } from '@/shared/constants/tableTitlesHome';
 import { Property } from '@/shared/types/Property';
 import { api } from '@/shared/utils/api';
+import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 interface HomeFiltersProps {
+  reload: boolean;
   filters: {
     uf: string;
     cidade: string;
@@ -29,7 +32,7 @@ interface HomeFiltersProps {
     | 'Desconto (maior para menor)';
 }
 
-export const HomeTable = ({ filters, order }: HomeFiltersProps) => {
+export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [page, setPage] = useState(1);
   const [perPage] = useState(20);
@@ -44,23 +47,30 @@ export const HomeTable = ({ filters, order }: HomeFiltersProps) => {
           order,
           ...filters,
         });
-        console.log(order);
         const response = await api.get(`/property?${params.toString()}`);
         const newData = response.data.data;
-        // console.log(response.data);
-        // console.log(response.data.data);
         setProperties(prev => [...prev, ...newData]);
       } catch (error) {
         console.error(error);
+
+        let message = 'Erro desconhecido. Tente novamente.';
+
+        if (isAxiosError(error)) {
+          message = error.response?.data?.message || error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toast.error(message);
       }
     }
     fetchProperties();
-  }, [page, filters, order]);
+  }, [page, filters, order, reload]);
 
   useEffect(() => {
     setProperties([]);
     setPage(1);
-  }, [filters, order]);
+  }, [filters, order, reload]);
 
   const handleScroll = () => {
     if (!cardRef.current) return;
@@ -75,8 +85,8 @@ export const HomeTable = ({ filters, order }: HomeFiltersProps) => {
   return (
     <div
       className={`
-      ${properties.length === 0 ? 'max-h-[600px]' : ' h-[600px]'}
-    h-[600px]  w-[1250px] mb-20 rounded-md bg-navy`}
+      ${properties.length === 0 || !properties ? 'max-h-[600px]' : ' h-[600px]'}
+     w-full  max-w-7xl mb-20 rounded-md bg-navy`}
     >
       <div
         ref={cardRef}
@@ -135,7 +145,7 @@ export const HomeTable = ({ filters, order }: HomeFiltersProps) => {
                   </TableCell>
                 </TableRow>
               ))}
-              {properties.length === 0 && (
+              {(properties.length === 0 || !properties) && (
                 <TableRow>
                   <TableCell colSpan={10} className='text-center py-6'>
                     Nenhum Imovel de Leilão

@@ -7,8 +7,17 @@ import {
   auctioneersLinksAuctionPortals,
 } from '@/shared/constants/auctioneersLinks';
 import Link from 'next/link';
+import { Metadata } from 'next';
 
-export default function DashboardPage() {
+export const metadata: Metadata = {
+  title: 'iMobi - Leilões',
+  description: 'Agende seus leilões',
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
+};
+
+export default function AuctioneersPage() {
   return (
     <Card className='w-full max-w-7xl px-9 py-9 mx-auto border-none shadow-2xl'>
       <Link

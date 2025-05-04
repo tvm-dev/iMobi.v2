@@ -47,14 +47,11 @@ export const HomeFilters = ({
   order,
   setOrder,
 }: HomeFiltersProps) => {
-  const { filterOptions, loading } = usePropertyFilters();
+  const { filterOptions } = usePropertyFilters();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value as HomeFiltersProps['order']);
   };
-
-  if (loading)
-    return <p className='text-sm text-gray-500'>Carregando filtros...</p>;
 
   return (
     <Card className='flex flex-col justify-between p-7 mb-8 w-full border-none'>

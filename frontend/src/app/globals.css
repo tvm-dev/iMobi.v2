@@ -55,4 +55,8 @@
   .text-navy {
     color: var(--color-navy);
   }
+
+  .text-stro {
+    -webkit-text-stroke: 1px black;
+  }
 }

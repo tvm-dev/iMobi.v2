@@ -9,6 +9,8 @@ import {
 import { format, addDays } from 'date-fns';
 import { Appointment } from '../types/Appointment';
 import { api } from '../utils/api';
+import { toast } from 'sonner';
+import { isAxiosError } from 'axios';
 
 interface AppointmentContextData {
   appointmentTodayBefore: Appointment[];
@@ -57,6 +59,16 @@ export const AppointmentProvider = ({
     } catch (error) {
       console.error('Erro ao buscar compromissos:', error);
       setAppointmentTodayBefore([]);
+
+      let message = 'Erro desconhecido. Tente novamente.';
+
+      if (isAxiosError(error)) {
+        message = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
     }
   }, []);
 

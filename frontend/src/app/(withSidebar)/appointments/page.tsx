@@ -1,7 +1,16 @@
 import { AppointmentsTables } from '@/components/pages/appointments/appointmentsTables';
 import { Title } from '@/components/shared/Title';
+import { Metadata } from 'next';
 
-export default function DashboardPage() {
+export const metadata: Metadata = {
+  title: 'iMobi - Agendamentos',
+  description: 'Agende seus leilões',
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
+};
+
+export default function AppointmentPage() {
   return (
     <div>
       <Title

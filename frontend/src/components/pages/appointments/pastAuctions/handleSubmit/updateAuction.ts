@@ -3,6 +3,8 @@ import {
   updateAppointmentSchema,
 } from '@/shared/schemas/appointment/updateAppointmentSchema';
 import { api } from '@/shared/utils/api';
+import { isAxiosError } from 'axios';
+import { toast } from 'sonner';
 
 interface handleSubmitUpdateProps {
   e: React.FormEvent;
@@ -13,6 +15,7 @@ interface handleSubmitUpdateProps {
   setNotes: (e: string) => void;
   notes: string;
   status: string;
+  fetchAppointments: () => void;
   cancel?: () => void;
 }
 
@@ -26,6 +29,7 @@ export const handleSubmitUpdate = async ({
   setNotes,
   setStatus,
   status,
+  fetchAppointments,
 }: handleSubmitUpdateProps) => {
   e.preventDefault();
   console.log('update');
@@ -50,8 +54,20 @@ export const handleSubmitUpdate = async ({
     setFormData({});
     setStatus('');
     setNotes('');
+    fetchAppointments();
     cancel && cancel();
+    toast.success('Agendamento atualizado com sucesso');
   } catch (error) {
     console.error(error);
+
+    let message = 'Erro desconhecido. Tente novamente.';
+
+    if (isAxiosError(error)) {
+      message = error.response?.data?.message || error.message;
+    } else if (error instanceof Error) {
+      message = error.message;
+    }
+
+    toast.error(message);
   }
 };

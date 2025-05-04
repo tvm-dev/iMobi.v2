@@ -5,8 +5,11 @@ import { motion } from 'framer-motion';
 import { Mail, Lock } from 'lucide-react'; // ícones minimalistas
 import { api } from '@/shared/utils/api';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { checkApiError } from '@/shared/utils/checkApiError';
+import { isAxiosError } from 'axios';
 
-export default function SignIn() {
+export const SignIn = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,10 +19,22 @@ export default function SignIn() {
     // Lógica de login
     try {
       const response = await api.post('/signIn', { email, password });
+      console.log(response);
+      checkApiError(response);
       router.push('/home');
-      console.log(response.data);
+      toast.success('Login efetuado com sucesso');
     } catch (error) {
       console.error(error);
+
+      let message = 'Erro desconhecido. Tente novamente.';
+
+      if (isAxiosError(error)) {
+        message = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
     }
   };
 
@@ -103,4 +118,4 @@ export default function SignIn() {
       <div className='mt-8 text-xs text-gray-400 text-center'>iMobi © 2025</div>
     </div>
   );
-}
+};

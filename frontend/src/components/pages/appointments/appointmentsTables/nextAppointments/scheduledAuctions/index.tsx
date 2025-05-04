@@ -1,3 +1,4 @@
+'use client';
 import { Card } from '@/components/ui/card';
 import {
   Table,
@@ -7,19 +8,22 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { tableTitlesAppointments } from '@/shared/constants/tableTitleAppointments';
-import { useAppointment } from '@/shared/hooks/appointmentHook';
+// import { useAppointment } from '@/shared/hooks/appointmentHook';
 import { useState } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { FaPencil } from 'react-icons/fa6';
 import { PastAuctions } from '../../../pastAuctions';
 import { Appointment } from '@/shared/types/Appointment';
 import { deleteAuction } from './deleteAuction';
+import { useAppointment } from '@/shared/contexts/AppointmentContext';
 
 interface ScheduledAuctionsProps {
   data: 'today' | 'tomorrow' | 'after' | 'before';
 }
 
 export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
+  const { fetchAppointments } = useAppointment();
+
   const [openEditAuctionsModal, setOpenEditAuctionsModal] =
     useState<boolean>(false);
   const [auction, setAuction] = useState<Appointment>();
@@ -109,7 +113,10 @@ export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
                       <FaTrash
                         className='text-red-600 hover:text-red-700 hover:cursor-pointer'
                         onClick={() => {
-                          deleteAuction(item.appointmentNumber);
+                          deleteAuction({
+                            fetchAppointments,
+                            id: item.appointmentNumber,
+                          });
                         }}
                       />
                     </span>

@@ -1,9 +1,16 @@
 'use client';
 import { api } from '@/shared/utils/api';
+import { isAxiosError } from 'axios';
 import { useRef } from 'react';
 import { FaFileImport } from 'react-icons/fa';
+import { toast } from 'sonner';
 
-export default function FileUploader() {
+interface FileUploaderProps {
+  reload: boolean;
+  setReload: (e: boolean) => void;
+}
+
+export default function FileUploader({ reload, setReload }: FileUploaderProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleDivClick = () => {
@@ -20,16 +27,26 @@ export default function FileUploader() {
     formData.append('file', file);
 
     try {
-      const res = await api.post('/property/upload', formData, {
+      await api.post('/property/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      console.log(res);
 
-      console.log('Dados importados com sucesso:', res.data);
+      toast.success('Imoveis lançados com sucesso');
+      setReload(reload);
     } catch (error) {
       console.error('Erro ao enviar arquivo:', error);
+
+      let message = 'Erro desconhecido. Tente novamente.';
+
+      if (isAxiosError(error)) {
+        message = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
     }
   };
 

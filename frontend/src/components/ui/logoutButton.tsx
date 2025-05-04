@@ -1,8 +1,10 @@
 'use client';
 import { cn } from '@/shared/lib/cn';
 import { api } from '@/shared/utils/api';
+import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { FaSignInAlt } from 'react-icons/fa';
+import { toast } from 'sonner';
 
 interface CustomLinkProps {
   line?: boolean;
@@ -12,10 +14,19 @@ interface CustomLinkProps {
 export const LogoutButton = ({ line, className }: CustomLinkProps) => {
   async function logout() {
     try {
-      const response = await api.delete('/logout');
-      console.log(response);
+      await api.delete('/logout');
+      toast.success('Logout realizado com sucesso');
     } catch (error) {
       console.error(error);
+      let message = 'Erro desconhecido. Tente novamente.';
+
+      if (isAxiosError(error)) {
+        message = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
     }
   }
   return (

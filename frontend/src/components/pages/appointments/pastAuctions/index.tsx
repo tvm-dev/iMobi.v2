@@ -22,6 +22,7 @@ import { CreateAppointmentData } from '@/shared/schemas/appointment/createAppoin
 import { handleSubmitCreate } from './handleSubmit/createAuction';
 import { Appointment } from '@/shared/types/Appointment';
 import { handleSubmitUpdate } from './handleSubmit/updateAuction';
+import { useAppointment } from '@/shared/contexts/AppointmentContext';
 
 interface PastAuctionsProps {
   state?: 'create' | 'update';
@@ -30,6 +31,7 @@ interface PastAuctionsProps {
 }
 
 export const PastAuctions = ({ state, auction, cancel }: PastAuctionsProps) => {
+  const { fetchAppointments } = useAppointment();
   const [formData, setFormData] = useState<Partial<CreateAppointmentData>>({});
   const [status, setStatus] = useState(auction ? auction.status : '');
   const [appointmentNumber, setAppointmentNumber] = useState('');
@@ -77,6 +79,7 @@ export const PastAuctions = ({ state, auction, cancel }: PastAuctionsProps) => {
                 setNotes,
                 notes,
                 status,
+                fetchAppointments,
               })
             : handleSubmitUpdate({
                 e,
@@ -88,6 +91,7 @@ export const PastAuctions = ({ state, auction, cancel }: PastAuctionsProps) => {
                 setNotes,
                 notes,
                 status,
+                fetchAppointments,
               });
         }}
       >

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import { api } from '../utils/api';
+import { toast } from 'sonner';
+import { isAxiosError } from 'axios';
 
 export interface FilterOptions {
   uf: string[];
@@ -25,6 +27,16 @@ export const usePropertyFilters = () => {
         setFilterOptions(response.data);
       } catch (error) {
         console.error('Erro ao buscar filtros:', error);
+
+        let message = 'Erro desconhecido. Tente novamente.';
+
+        if (isAxiosError(error)) {
+          message = error.response?.data?.message || error.message;
+        } else if (error instanceof Error) {
+          message = error.message;
+        }
+
+        toast.error(message);
       } finally {
         setLoading(false);
       }

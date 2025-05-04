@@ -4,8 +4,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Lock, User } from 'lucide-react'; // ícones minimalistas
 import { api } from '@/shared/utils/api';
+import { toast } from 'sonner';
+import { isAxiosError } from 'axios';
 
-export default function SignUp() {
+export const SignUp = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,9 +22,20 @@ export default function SignUp() {
     }
 
     try {
-      const response = await api.post('/user', { name, email, password });
+      await api.post('/user', { name, email, password });
+      toast.success('Conta criado com sucesso');
     } catch (error) {
       console.error(error);
+
+      let message = 'Erro desconhecido. Tente novamente.';
+
+      if (isAxiosError(error)) {
+        message = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        message = error.message;
+      }
+
+      toast.error(message);
     }
 
     // Lógica de registro aqui (ex: chamada para API de cadastro)
@@ -138,4 +151,4 @@ export default function SignUp() {
       <div className='mt-8 text-xs text-gray-400 text-center'>iMobi © 2025</div>
     </div>
   );
-}
+};

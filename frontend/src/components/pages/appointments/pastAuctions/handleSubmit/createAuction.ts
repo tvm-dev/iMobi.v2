@@ -3,6 +3,8 @@ import {
   createAppointmentSchema,
 } from '@/shared/schemas/appointment/createAppointmentSchema';
 import { api } from '@/shared/utils/api';
+import { isAxiosError } from 'axios';
+import { toast } from 'sonner';
 
 interface handleSubmitCreateProps {
   e: React.FormEvent;
@@ -13,6 +15,7 @@ interface handleSubmitCreateProps {
   setNotes: (e: string) => void;
   notes: string;
   status: string;
+  fetchAppointments: () => void;
 }
 
 export const handleSubmitCreate = async ({
@@ -24,6 +27,7 @@ export const handleSubmitCreate = async ({
   setNotes,
   setStatus,
   status,
+  fetchAppointments,
 }: handleSubmitCreateProps) => {
   e.preventDefault();
   console.log('create');
@@ -37,18 +41,27 @@ export const handleSubmitCreate = async ({
     const result = createAppointmentSchema.safeParse(fullData);
 
     if (!result.success) {
-      console.error(result);
-      // setError(result.error.errors[0]?.message || 'Erro ao validar dados');
+      toast.error(result.error.errors[0]?.message || 'Erro ao validar dados');
       return;
     }
-    const response = await api.post('/appointment', { ...fullData });
-    console.log(response.data);
+    await api.post('/appointment', { ...fullData });
     // Resetar formulário
     setFormData({});
     setStatus('');
     setNotes('');
+    fetchAppointments();
     cancel && cancel();
+    toast.success('Agendamento criado com sucesso');
   } catch (error) {
     console.error(error);
+    let message = 'Erro desconhecido. Tente novamente.';
+
+    if (isAxiosError(error)) {
+      message = error.response?.data?.message || error.message;
+    } else if (error instanceof Error) {
+      message = error.message;
+    }
+
+    toast.error(message);
   }
 };
