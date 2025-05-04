@@ -1,4 +1,4 @@
-import { FaCity, FaHotel, FaMapPin, FaSort, FaTag } from 'react-icons/fa';
+import { FaCity, FaHotel, FaMapPin, FaTag } from 'react-icons/fa';
 import { FaLocationDot } from 'react-icons/fa6';
 
 export const homeFilter = [

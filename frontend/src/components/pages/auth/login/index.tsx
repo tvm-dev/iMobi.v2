@@ -19,7 +19,6 @@ export const SignIn = () => {
     // Lógica de login
     try {
       const response = await api.post('/signIn', { email, password });
-      console.log(response);
       checkApiError(response);
       router.push('/home');
       toast.success('Login efetuado com sucesso');

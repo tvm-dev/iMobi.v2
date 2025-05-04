@@ -1,5 +1,4 @@
 'use client';
-import { Card } from '@/components/ui/card';
 import {
   Table,
   TableBody,
@@ -65,7 +64,7 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
       }
     }
     fetchProperties();
-  }, [page, filters, order, reload]);
+  }, [page, perPage, filters, order, reload]);
 
   useEffect(() => {
     setProperties([]);

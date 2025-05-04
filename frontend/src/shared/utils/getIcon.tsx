@@ -1,6 +1,5 @@
 import { HiHome } from 'react-icons/hi';
 import { FaCalendarCheck, FaGavel } from 'react-icons/fa';
-import { AiOutlineMail } from 'react-icons/ai';
 
 export function getIcon(pathname: string, size: number) {
   switch (pathname) {

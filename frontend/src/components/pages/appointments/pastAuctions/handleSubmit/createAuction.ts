@@ -50,7 +50,7 @@ export const handleSubmitCreate = async ({
     setStatus('');
     setNotes('');
     fetchAppointments();
-    cancel && cancel();
+    cancel?.();
     toast.success('Agendamento criado com sucesso');
   } catch (error) {
     console.error(error);

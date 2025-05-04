@@ -14,7 +14,7 @@ export type UserRole = keyof typeof rolePermissions;
 export async function middleware(req: NextRequest) {
   console.log('🔍 Middleware executado!');
 
-  let token = req.cookies.get('token')?.value;
+  const token = req.cookies.get('token')?.value;
   if (!token) {
     console.log('🚫 Token não encontrado. Redirecionando para login...');
     return NextResponse.redirect(new URL('/login', req.url));

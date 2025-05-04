@@ -69,30 +69,32 @@ export const PastAuctions = ({ state, auction, cancel }: PastAuctionsProps) => {
       <form
         className='space-y-6'
         onSubmit={e => {
-          state === 'create'
-            ? handleSubmitCreate({
-                e,
-                cancel,
-                formData,
-                setFormData,
-                setStatus,
-                setNotes,
-                notes,
-                status,
-                fetchAppointments,
-              })
-            : handleSubmitUpdate({
-                e,
-                cancel,
-                appointmentNumber,
-                formData,
-                setFormData,
-                setStatus,
-                setNotes,
-                notes,
-                status,
-                fetchAppointments,
-              });
+          if (state === 'create') {
+            handleSubmitCreate({
+              e,
+              cancel,
+              formData,
+              setFormData,
+              setStatus,
+              setNotes,
+              notes,
+              status,
+              fetchAppointments,
+            });
+          } else {
+            handleSubmitUpdate({
+              e,
+              cancel,
+              appointmentNumber,
+              formData,
+              setFormData,
+              setStatus,
+              setNotes,
+              notes,
+              status,
+              fetchAppointments,
+            });
+          }
         }}
       >
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -164,7 +166,7 @@ export const PastAuctions = ({ state, auction, cancel }: PastAuctionsProps) => {
               setStatus('');
               setNotes('');
               setError(null);
-              cancel && cancel();
+              cancel?.();
             }}
             className='p-3 flex flex-row justify-center items-center bg-yellow-400 text-black hover:bg-yellow-500'
           >

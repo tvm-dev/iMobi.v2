@@ -5,7 +5,6 @@ import { LogoutButton } from '@/components/ui/logoutButton';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { Logo } from '../../shared/Logo';
-import { FaSignInAlt } from 'react-icons/fa';
 import { ExtraButton } from './extraButton';
 
 interface SidebarProps {

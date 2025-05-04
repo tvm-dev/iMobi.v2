@@ -47,7 +47,7 @@ export const handleSubmitUpdate = async ({
       // setError(result.error.errors[0]?.message || 'Erro ao validar dados');
       return;
     }
-    const response = await api.patch(`/appointment/${appointmentNumber}`, {
+    await api.patch(`/appointment/${appointmentNumber}`, {
       ...fullData,
     });
     // Resetar formulário
@@ -55,7 +55,7 @@ export const handleSubmitUpdate = async ({
     setStatus('');
     setNotes('');
     fetchAppointments();
-    cancel && cancel();
+    cancel?.();
     toast.success('Agendamento atualizado com sucesso');
   } catch (error) {
     console.error(error);
