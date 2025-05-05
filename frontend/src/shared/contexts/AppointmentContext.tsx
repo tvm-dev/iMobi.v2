@@ -17,6 +17,7 @@ interface AppointmentContextData {
   appointmentTodayAfter: Appointment[];
   appointmentToday: Appointment[];
   appointmentTomorrow: Appointment[];
+  appointmentThenTomorrow: Appointment[];
   fetchAppointments: () => void;
 }
 
@@ -39,21 +40,28 @@ export const AppointmentProvider = ({
   const [appointmentTomorrow, setAppointmentTomorrow] = useState<Appointment[]>(
     []
   );
+  const [appointmentThenTomorrow, setAppointmentThenTomorrow] = useState<
+    Appointment[]
+  >([]);
 
   const fetchAppointments = useCallback(async () => {
     try {
       const today = format(new Date(), 'yyyy-MM-dd');
       const tomorrow = format(addDays(new Date(), 1), 'yyyy-MM-dd');
+      const thenTomorrow = format(addDays(new Date(), 2), 'yyyy-MM-dd');
 
-      const [resToday, resTomorrow, resBefore, resAfter] = await Promise.all([
-        api.get(`/appointment/data?data=${today}&where=in`),
-        api.get(`/appointment/data?data=${tomorrow}&where=in`),
-        api.get(`/appointment/data?data=${today}&where=before`),
-        api.get(`/appointment/data?data=${today}&where=after`),
-      ]);
+      const [resToday, resTomorrow, resThenTomorrow, resBefore, resAfter] =
+        await Promise.all([
+          api.get(`/appointment/data?data=${today}&where=in`),
+          api.get(`/appointment/data?data=${tomorrow}&where=in`),
+          api.get(`/appointment/data?data=${thenTomorrow}&where=in`),
+          api.get(`/appointment/data?data=${today}&where=before`),
+          api.get(`/appointment/data?data=${today}&where=after`),
+        ]);
 
       setAppointmentToday(resToday.data);
       setAppointmentTomorrow(resTomorrow.data);
+      setAppointmentThenTomorrow(resThenTomorrow.data);
       setAppointmentTodayBefore(resBefore.data);
       setAppointmentTodayAfter(resAfter.data);
     } catch (error) {
@@ -83,6 +91,7 @@ export const AppointmentProvider = ({
         appointmentTodayAfter,
         appointmentToday,
         appointmentTomorrow,
+        appointmentThenTomorrow,
         fetchAppointments,
       }}
     >

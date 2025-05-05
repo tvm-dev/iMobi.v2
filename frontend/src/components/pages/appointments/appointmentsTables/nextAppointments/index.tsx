@@ -20,6 +20,13 @@ export const Appointments = () => {
         label='Leilões Amanhã'
       />
       <ScheduledAuctions data='tomorrow' />
+      {/* Leilões depois amanhã  */}
+      <AppointmentTitle
+        color='text-red-500'
+        icon={<FaCalendarCheck size={25} className='text-red-500' />}
+        label='Leilões Depois de Amanhã'
+      />
+      <ScheduledAuctions data='thenTomorrow' />
       {/* Todos os leilões  */}
       <AppointmentTitle
         color='text-sky-950'

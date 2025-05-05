@@ -18,7 +18,7 @@ import { deleteAuction } from './deleteAuction';
 import { useAppointment } from '@/shared/contexts/AppointmentContext';
 
 interface ScheduledAuctionsProps {
-  data: 'today' | 'tomorrow' | 'after' | 'before';
+  data: 'today' | 'tomorrow' | 'thenTomorrow' | 'after' | 'before';
 }
 
 export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
@@ -33,6 +33,7 @@ export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
     appointmentTodayBefore,
     appointmentToday,
     appointmentTomorrow,
+    appointmentThenTomorrow,
   } = useAppointment();
 
   function tableData() {
@@ -45,6 +46,8 @@ export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
         return appointmentToday;
       case 'tomorrow':
         return appointmentTomorrow;
+      case 'thenTomorrow':
+        return appointmentThenTomorrow;
     }
   }
 
@@ -78,7 +81,7 @@ export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {tables.length > 0 ? (
+            {tables && tables.length > 0 ? (
               tables.map((item, i) => (
                 <TableRow key={i}>
                   {(data === 'before' || data === 'after') && (
