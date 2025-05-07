@@ -11,6 +11,7 @@ export interface FilterOptions {
 }
 
 export const usePropertyFilters = () => {
+  const [reload, setReload] = useState<boolean>(false);
   const [filterOptions, setFilterOptions] = useState<FilterOptions>({
     uf: [],
     cidade: [],
@@ -43,7 +44,7 @@ export const usePropertyFilters = () => {
     };
 
     fetchFilters();
-  }, []);
+  }, [reload]);
 
-  return { filterOptions, loading };
+  return { filterOptions, loading, setReload };
 };
