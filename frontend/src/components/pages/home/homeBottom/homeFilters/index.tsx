@@ -1,11 +1,12 @@
 import { Card } from '@/components/ui/card';
 import { SelectFilter } from './selectFilter';
 import { homeFilter } from '@/shared/constants/homeFilter';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { usePropertyFilters } from '@/shared/hooks/propertyFilters';
 import { FaSort } from 'react-icons/fa';
 
 interface HomeFiltersProps {
+  reload: boolean;
   setFilters: Dispatch<
     SetStateAction<{
       uf: string;
@@ -42,13 +43,17 @@ interface HomeFiltersProps {
 }
 
 export const HomeFilters = ({
+  reload,
   setFilters,
   filters,
   order,
   setOrder,
 }: HomeFiltersProps) => {
-  const { filterOptions } = usePropertyFilters();
+  const { filterOptions, setReload } = usePropertyFilters();
 
+  useEffect(() => {
+    setReload(!reload);
+  }, [reload]);
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setOrder(e.target.value as HomeFiltersProps['order']);
   };

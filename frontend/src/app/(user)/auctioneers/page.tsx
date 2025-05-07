@@ -20,12 +20,6 @@ export const metadata: Metadata = {
 export default function AuctioneersPage() {
   return (
     <Card className='w-full max-w-7xl px-9 py-9 mx-auto border-none shadow-2xl'>
-      <Link
-        href={'/home'}
-        className='hover:cursor-pointer hover:underline hover:text-blue-950'
-      >
-        Voltar para o inicio
-      </Link>
       <h1 className='text-3xl text-center font-bold'>
         Leilões de Imóveis - Links Verificados
       </h1>

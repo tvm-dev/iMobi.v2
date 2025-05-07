@@ -12,7 +12,7 @@ import { api } from '@/shared/utils/api';
 import { isAxiosError } from 'axios';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaExternalLinkAlt, FaSpinner } from 'react-icons/fa';
 import { toast } from 'sonner';
 
 interface HomeFiltersProps {
@@ -32,6 +32,7 @@ interface HomeFiltersProps {
 }
 
 export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
   const [properties, setProperties] = useState<Property[]>([]);
   const [page, setPage] = useState(1);
   const [perPage] = useState(20);
@@ -40,6 +41,7 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
   useEffect(() => {
     async function fetchProperties() {
       try {
+        setLoading(true);
         const params = new URLSearchParams({
           page: page.toString(),
           perPage: perPage.toString(),
@@ -61,9 +63,12 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
         }
 
         toast.error(message);
+      } finally {
+        setLoading(false);
       }
     }
     fetchProperties();
+    console.log(reload);
   }, [page, perPage, filters, order, reload]);
 
   useEffect(() => {
@@ -85,7 +90,7 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
     <div
       className={`
       ${properties.length === 0 || !properties ? 'max-h-[600px]' : ' h-[600px]'}
-     w-full  max-w-7xl mb-20 rounded-md bg-navy`}
+     w-full  max-w-7xl mb-20 rounded-md bg-navy text-sm`}
     >
       <div
         ref={cardRef}
@@ -95,12 +100,12 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
         {/* Scroll horizontal e vertical */}
         <div className='w-max min-w-full'>
           <Table>
-            <TableHeader className='sticky top-0 z-10 bg-navy'>
+            <TableHeader className='sticky top-0 z-10 bg-navy '>
               <TableRow>
                 {tableTitles.map((title, i) => (
                   <TableCell
                     key={i}
-                    className='py-6 text-white font-bold bg-navy'
+                    className='py-6 text-white font-bold bg-navy '
                   >
                     <div className='flex flex-row gap-1 justify-center items-center text-[17px]'>
                       {title.label} {title.icon}
@@ -115,18 +120,24 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
                   key={i}
                   className={`${
                     i % 2 === 0 ? 'bg-zinc-100' : 'bg-white'
-                  } text-[16px]`}
+                  } text-[13px] `}
                 >
                   <TableCell className='py-5'>{property.UF}</TableCell>
-                  <TableCell>{property.Cidade}</TableCell>
-                  <TableCell>{property.Bairro}</TableCell>
-                  <TableCell>{property.Endereço}</TableCell>
+                  <TableCell className='max-w-32 break-words whitespace-normal'>
+                    {property.Cidade}
+                  </TableCell>
+                  <TableCell className='max-w-40 break-words whitespace-normal'>
+                    {property.Bairro}
+                  </TableCell>
+                  <TableCell className='max-w-52 break-words whitespace-normal'>
+                    {property.Endereço}
+                  </TableCell>
                   <TableCell className='text-green-600 font-bold'>
                     R$ {property.Preço}
                   </TableCell>
                   <TableCell>R$ {property.Avaliação}</TableCell>
                   <TableCell>
-                    <div className='bg-green-600 mx-auto text-white w-[60%] p-1 rounded-2xl'>
+                    <div className='bg-green-600 text-center mx-auto text-white w-[60%] p-1 rounded-2xl'>
                       {property.Desconto} %
                     </div>
                   </TableCell>
@@ -144,10 +155,19 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
                   </TableCell>
                 </TableRow>
               ))}
-              {(properties.length === 0 || !properties) && (
+              {!loading ? (
+                (properties.length === 0 || !properties) &&
+                !loading && (
+                  <TableRow>
+                    <TableCell colSpan={10} className='text-center py-6'>
+                      Nenhum Imovel de Leilão
+                    </TableCell>
+                  </TableRow>
+                )
+              ) : (
                 <TableRow>
-                  <TableCell colSpan={10} className='text-center py-6'>
-                    Nenhum Imovel de Leilão
+                  <TableCell colSpan={10}>
+                    <FaSpinner className='animate-spin text-blue-500' />
                   </TableCell>
                 </TableRow>
               )}

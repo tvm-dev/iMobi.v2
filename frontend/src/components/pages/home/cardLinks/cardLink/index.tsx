@@ -13,7 +13,7 @@ export const CardLink = ({ href, icon, label }: CardLinkProps) => {
       {icon}
       <div>
         {label}{' '}
-        <Link href={href} className='font-bold text-blue-950'>
+        <Link href={href} className='font-bold text-blue-950' target='_blank'>
           este link
         </Link>
       </div>

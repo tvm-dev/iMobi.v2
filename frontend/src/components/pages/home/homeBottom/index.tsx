@@ -27,6 +27,7 @@ export const HomeBottom = () => {
 
       {/* Card com os filtros  */}
       <HomeFilters
+        reload={reload}
         filters={filters}
         setFilters={setFilters}
         order={order}
