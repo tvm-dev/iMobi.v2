@@ -6,7 +6,6 @@ import {
   auctioneersLinksBanks,
   auctioneersLinksAuctionPortals,
 } from '@/shared/constants/auctioneersLinks';
-import Link from 'next/link';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
