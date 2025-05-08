@@ -1,7 +1,10 @@
 import { Property } from '../entitties/Property';
 
 export abstract class PropertyRepository {
-  abstract createProperty(appointment: Property): Promise<Property>;
+  abstract createProperty(
+    appointment: Property,
+    userId: string,
+  ): Promise<Property>;
   // Get
   abstract getAllProperties(
     userId: string,

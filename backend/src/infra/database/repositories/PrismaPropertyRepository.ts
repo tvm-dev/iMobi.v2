@@ -10,10 +10,6 @@ export class PrismaPropertyRepository implements PropertyRepository {
 
   // Others
   async createNextPropertyNumber(userId: string): Promise<Property | null> {
-    await this.prisma.property.deleteMany({
-      where: { userId },
-    });
-
     const lastAppointment = await this.prisma.property.findFirst({
       where: { userId },
       orderBy: { propertyNumber: 'desc' },
@@ -27,7 +23,14 @@ export class PrismaPropertyRepository implements PropertyRepository {
   }
 
   // Post
-  async createProperty(appointment: Property): Promise<Property> {
+  async createProperty(
+    appointment: Property,
+    userId: string,
+  ): Promise<Property> {
+    await this.prisma.property.deleteMany({
+      where: { userId },
+    });
+
     const data = PrismaPropertyMapper.toPrisma(appointment);
     const property = await this.prisma.property.create({
       data: data,

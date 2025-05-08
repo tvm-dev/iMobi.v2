@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { parse } from 'csv-parse/sync';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as iconv from 'iconv-lite';
 import { PropertyRepository } from '../repositories/PropertyRepository';
 import { Property } from '../entitties/Property';
 
@@ -15,8 +16,24 @@ export class CreatePropertyUseCase {
     }
 
     const filePath = path.resolve(file.path);
-    const csvContent = fs.readFileSync(filePath, 'utf-8');
 
+    // Lê o arquivo como buffer
+    const fileBuffer = fs.readFileSync(filePath);
+
+    // Primeiro tenta decodificar como latin1, depois utf-8 se falhar
+    let csvContent: string;
+    try {
+      csvContent = iconv.decode(fileBuffer, 'latin1');
+      // Verifica se ainda contém caracteres inválidos, como '�'
+      if (csvContent.includes('�')) {
+        console.warn('latin1 com problemas, tentando utf-8...');
+        csvContent = iconv.decode(fileBuffer, 'utf-8');
+      }
+    } catch (err) {
+      console.warn('Erro com latin1, tentando utf-8...');
+      csvContent = iconv.decode(fileBuffer, 'utf-8');
+    }
+    console.log('Linha de teste:', csvContent.split('\n')[0]);
     // Remove cabeçalhos desnecessários
     const lines = csvContent.split('\n').slice(2);
     const cleaned = lines.join('\n');
@@ -29,28 +46,23 @@ export class CreatePropertyUseCase {
         columns: (header: string[]) =>
           header.map((col) =>
             col
-              .replace(/ç/g, 'c') // substitui manualmente caracteres problemáticos
-              .replace(/�/g, '') // remove caracteres corrompidos
+              .replace(/ç/g, 'c')
+              .replace(/�/g, '')
               .normalize('NFD')
-              .replace(/[\u0300-\u036f]/g, '') // remove acentos
-
-              .replace(/[^\w\s]/gi, '') // remove caracteres especiais
+              .replace(/[\u0300-\u036f]/g, '')
+              .replace(/[^\w\s]/gi, '')
               .trim()
-              .replace(/\s+/g, '_') // substitui espaços por underline
+              .replace(/\s+/g, '_')
               .toLowerCase(),
           ),
       });
-
-      // Encontrar o último appointment para o usuário específico
       const lastAppointment =
         await this.propertyRepository.createNextPropertyNumber(userId);
 
-      // Calcular o próximo appointmentNumber
       const nextAppointmentNumber =
         Number(lastAppointment?.appointmentNumber ?? 0) + 1;
 
-      // Criar uma nova instância de Appointment com o número calculado
-      const properties = await Promise.all(
+      await Promise.all(
         records.map((record: any, i: string) => {
           const property = new Property(
             {
@@ -58,27 +70,23 @@ export class CreatePropertyUseCase {
               UF: record.uf,
               Cidade: record.cidade,
               Bairro: record.bairro,
-              Endereço: record.endereo,
-              Preço: record.preo,
-              Avaliação: record.valor_de_avaliao,
+              Endereço: record.endereco,
+              Preço: record.preco,
+              Avaliação: record.valor_de_avaliacao,
               Desconto: record.desconto,
-              Tipo: record.descrio?.split(',')[0]?.trim(),
+              Tipo: record.descricao?.split(',')[0]?.trim(),
               Modalidade: record.modalidade_de_venda,
               link: record.link_de_acesso,
-              // record.link_de_acesso
             },
             (nextAppointmentNumber + i).toString(),
           );
-          return this.propertyRepository.createProperty(property);
+          return this.propertyRepository.createProperty(property, userId);
         }),
       );
-
-      // -------------------------------------
 
       return {
         success: true,
         quantidade: records.length,
-        exemplo: records.slice(0, 3), // Retorna os 3 primeiros registros
       };
     } catch (error) {
       console.log(error);
@@ -87,7 +95,6 @@ export class CreatePropertyUseCase {
         HttpStatus.INTERNAL_SERVER_ERROR,
       );
     } finally {
-      // Remover o arquivo temporário
       fs.unlinkSync(filePath);
     }
   }
