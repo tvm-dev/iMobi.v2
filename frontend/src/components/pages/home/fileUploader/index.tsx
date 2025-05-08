@@ -22,8 +22,10 @@ export default function FileUploader({ reload, setReload }: FileUploaderProps) {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const file = event.target.files?.[0];
-    toast.error('Arquivo invalido');
-    if (!file) return;
+    if (!file) {
+      toast.error('Arquivo invalido');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('file', file);

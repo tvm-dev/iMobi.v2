@@ -167,7 +167,7 @@ export const HomeTable = ({ reload, filters, order }: HomeFiltersProps) => {
               ) : (
                 <TableRow>
                   <TableCell colSpan={10}>
-                    <FaSpinner className='animate-spin text-blue-500' />
+                    <FaSpinner className='text-center py-6' />
                   </TableCell>
                 </TableRow>
               )}
