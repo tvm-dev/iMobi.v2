@@ -16,6 +16,7 @@ import { PastAuctions } from '../../../pastAuctions';
 import { Appointment } from '@/shared/types/Appointment';
 import { deleteAuction } from './deleteAuction';
 import { useAppointment } from '@/shared/contexts/AppointmentContext';
+import Link from 'next/link';
 
 interface ScheduledAuctionsProps {
   data: 'today' | 'tomorrow' | 'thenTomorrow' | 'after' | 'before';
@@ -99,7 +100,11 @@ export const ScheduledAuctions = ({ data }: ScheduledAuctionsProps) => {
                     <span className='ml-2'>{item.location}</span>
                   </TableCell>
                   <TableCell>
-                    <span className='ml-2'>{item.link}</span>
+                    <span className='ml-2 hover:cursor-pointer hover:text-blue-950'>
+                      <Link href={item.link} target='_blank'>
+                        {item.link}
+                      </Link>
+                    </span>
                   </TableCell>
                   <TableCell>
                     <span className='ml-2'>{item.status}</span>

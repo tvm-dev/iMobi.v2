@@ -41,6 +41,7 @@ export class AuthController {
   }
 
   @Delete('logout')
+  @Public()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK)
   async logout(@Res({ passthrough: true }) response: Response) {
