@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Lock } from 'lucide-react'; // ícones minimalistas
+import { Mail, Lock, EyeOff, Eye } from 'lucide-react'; // ícones minimalistas
 import { api } from '@/shared/utils/api';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -10,6 +10,7 @@ import { checkApiError } from '@/shared/utils/checkApiError';
 import { isAxiosError } from 'axios';
 
 export const SignIn = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -85,13 +86,21 @@ export const SignIn = () => {
               size={20}
             />
             <input
-              type='password'
+              type={showPassword ? 'text' : 'password'}
               placeholder='Senha'
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className='w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
+              className='w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
+            <button
+              type='button'
+              onClick={() => setShowPassword(!showPassword)}
+              className='absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600'
+              tabIndex={-1}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
           </div>
 
           <button
